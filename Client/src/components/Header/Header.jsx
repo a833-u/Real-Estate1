@@ -17,18 +17,18 @@ const Header = () => {
   const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
   const { validateLogin } = useAuthCheck();
 
+
   const handleAddPropertyClick = () => {
     if (validateLogin()) {
       setModalOpened(true);
     }
   };
-
   return (
     <section className="h-wrapper" style={{ background: headerColor }}>
       <div className="flexCenter innerWidth paddings h-container">
         {/* logo */}
         <Link className="logo" to="/">
-          <img src="./logo.png" alt="logo" />
+          <img src="./logo.png" alt="logo" width={100} />
         </Link>
 
         {/* menu */}
@@ -37,11 +37,19 @@ const Header = () => {
             setMenuOpened(false);
           }}
         >
-          <div className="flexCenter h-menu" style={getMenuStyles(menuOpened)}>
+          <div
+            // ref={menuRef}
+            className="flexCenter h-menu"
+            style={getMenuStyles(menuOpened)}
+          >
             <NavLink to="/properties">Properties</NavLink>
-            <a href="mailto:dhairya080803@gmail.com">Contact</a>
+
+            <a href="mailto:zainkeepscode@gmail.com">Contact</a>
+
+            {/* add property */}
             <div onClick={handleAddPropertyClick}>Add Property</div>
             <AddPropertyModal opened={modalOpened} setOpened={setModalOpened} />
+            {/* login button */}
             {!isAuthenticated ? (
               <button className="button" onClick={loginWithRedirect}>
                 Login
@@ -53,7 +61,10 @@ const Header = () => {
         </OutsideClickHandler>
 
         {/* for medium and small screens */}
-        <div className="menu-icon" onClick={() => setMenuOpened((prev) => !prev)}>
+        <div
+          className="menu-icon"
+          onClick={() => setMenuOpened((prev) => !prev)}
+        >
           <BiMenuAltRight size={30} />
         </div>
       </div>
